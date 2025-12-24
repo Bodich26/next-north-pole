@@ -1,9 +1,10 @@
 export const dynamic = "force-dynamic";
 import { fetchGifts } from "@/api/fetch-gifts";
+import { GiftStatusBadge } from "@/components/gift-status-badge";
 import Link from "next/link";
 
 export default async function Gifts() {
-  const gifts = await fetchGifts();
+  const { giftList } = await fetchGifts();
 
   return (
     <section className="flex flex-col gap-2.5 w-full">
@@ -14,19 +15,19 @@ export default async function Gifts() {
         Welcome to the Gifts page!
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {!gifts && <p>No gifts found</p>}
+        {!giftList && <p>No gifts found</p>}
 
-        {gifts.length === 0 ? (
+        {giftList.length === 0 ? (
           <p>No gifts available.</p>
         ) : (
-          gifts.map((item) => (
+          giftList.map((item) => (
             <div
               key={item.id}
               className="flex flex-col p-4 border rounded gap-1"
             >
-              <h4 className="text-lg font-semibold">{item.person}</h4>
-              <p>{item.object_name}</p>
-              <p>{item.status}</p>
+              <h4 className="text-lg font-semibold">{item.recipientName}</h4>
+              <p>{item.title}</p>
+              <GiftStatusBadge status={item.status} />
               <Link href={`/gifts/${item.id}`}>Подробнее</Link>
             </div>
           ))
