@@ -26,11 +26,6 @@ export interface Gift {
   updatedAt: number; // Unix timestamp
 }
 
-export interface FetchGiftsResult {
-  gifts: Gift[];
-  giftList: GiftListItem[];
-}
-
 export type GiftListItem = Pick<
   Gift,
   "id" | "recipientName" | "title" | "status"
