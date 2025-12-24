@@ -1,24 +1,37 @@
 export const dynamic = "force-dynamic";
-import { API_ROUTES, BASE_MOCK_API } from "../../../routes";
+import { fetchGifts } from "@/api/fetch-gifts";
+import Link from "next/link";
 
 export default async function Gifts() {
-  const res = await fetch(`${BASE_MOCK_API}${API_ROUTES.GIFTS}`, {
-    cache: "no-store",
-  });
-
-  const gifts = await res.json();
+  const gifts = await fetchGifts();
 
   return (
-    <section className="flex flex-col gap-2.5">
-      <h1>Gifts Page</h1>
-      <p>Welcome to the Gifts page!</p>
-      {gifts.map((item) => (
-        <div key={item.id} className="p-4 border rounded">
-          <h4 className="text-lg font-semibold">{item.person}</h4>
-          <p>{item.object_name}</p>
-          <span>{item.status}</span>
-        </div>
-      ))}
+    <section className="flex flex-col gap-2.5 w-full">
+      <h1 className="text-4xl font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
+        Gifts Page
+      </h1>
+      <p className="font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-xl">
+        Welcome to the Gifts page!
+      </p>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {!gifts && <p>No gifts found</p>}
+
+        {gifts.length === 0 ? (
+          <p>No gifts available.</p>
+        ) : (
+          gifts.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col p-4 border rounded gap-1"
+            >
+              <h4 className="text-lg font-semibold">{item.person}</h4>
+              <p>{item.object_name}</p>
+              <p>{item.status}</p>
+              <Link href={`/gifts/${item.id}`}>Подробнее</Link>
+            </div>
+          ))
+        )}
+      </div>
     </section>
   );
 }
