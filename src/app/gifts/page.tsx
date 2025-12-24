@@ -1,18 +1,18 @@
 export const dynamic = "force-dynamic";
-import { fetchGifts } from "@/api/fetch-gifts";
+import { fetchGiftList } from "@/api/fetch-gifts";
 import { GiftStatusBadge } from "@/components/gift-status-badge";
 import Link from "next/link";
 
 export default async function Gifts() {
-  const { giftList } = await fetchGifts();
+  const giftList = await fetchGiftList();
 
   return (
     <section className="flex flex-col gap-2.5 w-full">
       <h1 className="text-4xl font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
-        Gifts Page
+        Список подарков
       </h1>
       <p className="font-bold leading-tight text-zinc-900 dark:text-zinc-100 sm:text-xl">
-        Welcome to the Gifts page!
+        Добавляйте, просматривайте и управляйте подарками здесь.
       </p>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {!giftList && <p>No gifts found</p>}
