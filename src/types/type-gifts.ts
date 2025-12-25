@@ -14,7 +14,7 @@ export interface Elf {
 }
 
 export interface Gift {
-  id: number;
+  id: string;
   title: string; // Название подарка
   recipientName: string; // Кому подарок (человек)
   status: GiftStatus; // Статус (строго типизирован)
