@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 import { fetchGiftList } from "@/api/fetch-gifts";
 import { GiftStatusBadge } from "@/components/gift-status-badge";
 import Link from "next/link";
+import { API_ROUTES } from "../../../routes";
 
 export default async function Gifts() {
   const giftList = await fetchGiftList();
@@ -28,7 +29,7 @@ export default async function Gifts() {
               <h4 className="text-lg font-semibold">{item.recipientName}</h4>
               <p>{item.title}</p>
               <GiftStatusBadge status={item.status} />
-              <Link href={`/gifts/${item.id}`}>Подробнее</Link>
+              <Link href={`${API_ROUTES.GIFTS}/${item.id}`}>Подробнее</Link>
             </div>
           ))
         )}
