@@ -1,4 +1,5 @@
 import { fetchGiftId } from "@/api/fetch-gift-id";
+import { ChangeStatusSelect } from "@/components/change-status-select";
 import { GiftStatusBadge } from "@/components/gift-status-badge";
 
 type Props = {
@@ -77,6 +78,7 @@ export default async function GiftId({ params }: Props) {
           </div>
         </div>
       </div>
+      <ChangeStatusSelect status={gift.status} giftId={gift.id} />
     </section>
   );
 }
