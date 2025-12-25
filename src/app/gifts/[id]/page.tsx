@@ -1,6 +1,8 @@
 import { fetchGiftId } from "@/api/fetch-gift-id";
 import { ChangeStatusSelect } from "@/components/change-status-select";
 import { GiftStatusBadge } from "@/components/gift-status-badge";
+import Link from "next/link";
+import { API_ROUTES } from "../../../../routes";
 
 type Props = {
   params: {
@@ -14,6 +16,12 @@ export default async function GiftId({ params }: Props) {
 
   return (
     <section className="max-w-3xl mx-auto px-4 py-8">
+      <Link
+        href={`${API_ROUTES.GIFTS}`}
+        className="text-sm hover:underline mb-4 inline-block"
+      >
+        Вернуться к списку
+      </Link>
       <div className="border rounded-xl p-6  shadow-sm space-y-6">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
