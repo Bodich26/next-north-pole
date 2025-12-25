@@ -5,7 +5,7 @@ export const fetchGiftId = async (id: string): Promise<Gift> => {
   const URL = `${BASE_MOCK_API}${API_ROUTES.GIFTS}/${id}`;
 
   const res = await fetch(URL, {
-    cache: "no-store",
+    next: { revalidate: 60 },
   });
 
   if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`);
